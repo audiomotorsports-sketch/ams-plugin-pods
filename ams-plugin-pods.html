@@ -1,0 +1,134 @@
+<!--
+  AMS Pods quote plugin
+  INSERT after </section> of class="hero-banner"
+  BEFORE <section class="offer-cards"
+  Pair with /assets/css/ams-plugin-pods.css
+-->
+<div class="ams-plug" id="ams-plug-pods" data-ams-plugin="pods-v1">
+  <div class="ams-plug-proof">
+    <div><span>Google</span><strong>4.8 from 654</strong></div>
+    <div><span>Yelp</span><strong>4.7 from 777</strong></div>
+    <div><span>Pods since</span><strong>2003</strong></div>
+    <div><span>Bay</span><strong>Carson</strong></div>
+    <div><span>Walk-in</span><strong>Mon–Sat 9:30–6</strong></div>
+  </div>
+
+  <section class="ams-plug-quote" id="quote">
+    <div class="container">
+      <span class="eyebrow">Harley desk · ask for Nick</span>
+      <h2>Text the year, make, and model. <em>Nick quotes the job.</em></h2>
+      <p class="lead">Road King, Street Glide, Road Glide. Chrome or gloss. Richard builds the pair. We do not ship pods.</p>
+
+      <div class="ams-plug-grid">
+        <input name="year" inputmode="numeric" autocomplete="off" placeholder="Year" aria-label="Year">
+        <input name="make" autocomplete="off" placeholder="Make" value="Harley" aria-label="Make">
+        <input name="model" autocomplete="off" placeholder="Model" aria-label="Model">
+      </div>
+
+      <div class="ams-plug-chips" data-chips>
+        <button type="button" data-job="Road King">Road King</button>
+        <button type="button" data-job="Street Glide">Street Glide</button>
+        <button type="button" data-job="Road Glide">Road Glide</button>
+        <button type="button" data-job="Chrome pods">Chrome pods</button>
+        <button type="button" data-job="Gloss black">Gloss black</button>
+      </div>
+
+      <div class="ams-plug-actions">
+        <a class="is-text" data-sms href="sms:+12134291092?body=Quote%20request%20from%20AMS%20Pods.%20Ask%20for%20Nick.">Text us a quote</a>
+        <a class="is-call" href="tel:+13105138800">Call (310) 513-8800</a>
+      </div>
+      <p class="fine">
+        Prefer email?
+        <a href="mailto:audiomotorsports@gmail.com?subject=Quote%20request%20%E2%80%94%20AMS%20Pods">audiomotorsports@gmail.com</a>
+      </p>
+    </div>
+  </section>
+
+  <section class="ams-plug-jobs">
+    <div class="container">
+      <span class="eyebrow">Three bikes. Three jobs.</span>
+      <h3>The King does not borrow a Glide layout.</h3>
+      <div class="ams-plug-cards">
+        <a class="ams-plug-card" href="/services/road-king-bagger-audio/">
+          <img src="/assets/img/shop/ams-pods-harley.jpg" width="900" height="700" alt="AMS pods on a Harley Road King" loading="lazy">
+          <div class="copy">
+            <h4>Road King</h4>
+            <p>No fairing. The pods do the talking.</p>
+            <span>Flagship</span>
+          </div>
+        </a>
+        <a class="ams-plug-card" href="/services/street-glide-bagger-audio/">
+          <img src="/assets/img/shop/harley-chrome.jpg" width="900" height="700" alt="Harley Street Glide chrome pods" loading="lazy">
+          <div class="copy">
+            <h4>Street Glide</h4>
+            <p>Batwing is not easier. It is different.</p>
+            <span>Batwing</span>
+          </div>
+        </a>
+        <a class="ams-plug-card" href="/services/road-glide-bagger-audio/">
+          <img src="/assets/img/shop/ams-pod-install.jpg" width="900" height="700" alt="AMS pod install on a Harley" loading="lazy">
+          <div class="copy">
+            <h4>Road Glide</h4>
+            <p>Shark nose. Amp inside. Tank comes off.</p>
+            <span>Shark nose</span>
+          </div>
+        </a>
+        <a class="ams-plug-card" href="/build-your-own/">
+          <img src="/assets/offers/cstyle/plates/plate-01-ams-pods.png" width="900" height="700" alt="AMS pods starting at $649 a pair" loading="lazy">
+          <div class="copy">
+            <h4>AMS pods</h4>
+            <p>Starting at $649 a pair. Chrome or gloss.</p>
+            <span>Pair only</span>
+          </div>
+        </a>
+      </div>
+    </div>
+  </section>
+</div>
+
+<div class="ams-plug-sticky" aria-label="Text or call">
+  <a class="is-text" data-sms-sticky href="sms:+12134291092?body=Quote%20request%20from%20AMS%20Pods.%20Ask%20for%20Nick.">Text us</a>
+  <a class="is-call" href="tel:+13105138800">Call</a>
+</div>
+
+<script>
+(function () {
+  var root = document.getElementById("ams-plug-pods");
+  if (!root) return;
+  var job = "";
+  function smsHref(body) {
+    var msg = encodeURIComponent(body);
+    return /iPhone|iPad|iPod/i.test(navigator.userAgent)
+      ? "sms:+12134291092&body=" + msg
+      : "sms:+12134291092?body=" + msg;
+  }
+  function body() {
+    var y = ((root.querySelector("[name=year]") || {}).value || "").trim();
+    var mk = ((root.querySelector("[name=make]") || {}).value || "").trim();
+    var md = ((root.querySelector("[name=model]") || {}).value || "").trim();
+    var bike = [y, mk, md].filter(Boolean).join(" ");
+    var parts = ["Quote request"];
+    if (bike) parts.push(bike);
+    if (job) parts.push(job);
+    parts.push("Ask for Nick. From AMS Pods.");
+    return parts.join(" — ");
+  }
+  function bind(el) {
+    if (!el) return;
+    el.addEventListener("click", function () {
+      el.href = smsHref(body());
+    });
+  }
+  root.querySelectorAll("[data-job]").forEach(function (btn) {
+    btn.addEventListener("click", function () {
+      var next = btn.getAttribute("data-job");
+      job = job === next ? "" : next;
+      root.querySelectorAll("[data-job]").forEach(function (b) {
+        b.classList.toggle("is-on", b.getAttribute("data-job") === job);
+      });
+    });
+  });
+  bind(root.querySelector("[data-sms]"));
+  bind(document.querySelector("[data-sms-sticky]"));
+})();
+</script>
